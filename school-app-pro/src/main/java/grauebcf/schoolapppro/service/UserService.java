@@ -42,4 +42,5 @@ public class UserService implements IUserService{
     private static User convertToUser(UserRegisterDTO userDTO) {
         return new User(userDTO.getEmail(), userDTO.getPassword());
     }
+
 }
