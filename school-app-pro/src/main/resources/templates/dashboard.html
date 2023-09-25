@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link th:href="@{/styles/dashboard.css}" href="/styles/dashboard.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Control Panel</h1>
+        <div class="buttons-container">
+            <a th:href="@{/teacher}" href="/teacher" class="control-btn">
+                <i class="fas fa-chalkboard-teacher"></i>
+                Teachers Menu
+            </a>
+            <a th:href="@{/student}" href="/student" class="control-btn">
+                <i class="fas fa-user-graduate"></i>
+                Students Menu
+            </a>
+            <a th:href="@{/city}" href="/city" class="control-btn">
+                <i class="fas fa-city"></i>
+                Cities Menu
+            </a>
+            <a th:href="@{/specialty}" href="/specialty" class="control-btn">
+                <i class="fas fa-certificate"></i>
+                Specialty Menu
+            </a>
+            <a th:href="@{/meeting}" href="/meeting" class="control-btn">
+                <i class="fas fa-calendar-alt"></i>
+                Meetings Menu
+            </a>
+        </div>
+    </div>
+</body>
+</html>
