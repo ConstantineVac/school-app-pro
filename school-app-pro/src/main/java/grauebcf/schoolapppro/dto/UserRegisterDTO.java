@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -17,6 +16,10 @@ public class UserRegisterDTO {
     @Email
     private String email;
     private String password;
-    private String confirmPassword;
+//    private String confirmPassword;
 
+    public UserRegisterDTO(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

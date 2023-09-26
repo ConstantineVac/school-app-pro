@@ -23,7 +23,14 @@ public class UserService implements IUserService{
 
     @Transactional
     @Override
-    public User registerUser(UserRegisterDTO userToRegister) { return userRepository.save(convertToUser(userToRegister)); }
+    public User registerUser(UserRegisterDTO userToRegister) {
+        // Log userToRegister here to check its values.
+        User user = convertToUser(userToRegister);
+        User savedUser = userRepository.save(user);
+        // Log savedUser and its properties to verify.
+        return savedUser;
+    }
+
 
     @Override
     public User getUserByEmail(String email) throws UserNotFoundException {
