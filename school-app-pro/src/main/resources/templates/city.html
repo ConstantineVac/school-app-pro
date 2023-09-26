@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>City Form</title>
+</head>
+    <body>
+        <h2>Search for a City</h2>
+        <form method="post" action="/city/search">
+            <label for="cityName">City Name:</label>
+            <input type="text" id="city-Name" name="cityName" required>
+            <button type="submit">Search</button>
+        </form>
+        <h2>Insert a City</h2>
+        <form method="post" action="/city/insert">
+            <label for="cityName">City Name:</label>
+            <input type="text" id="cityName" name="cityName" required>
+            <button type="submit">Insert</button>
+        </form>
+    </body>
+</html>

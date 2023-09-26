@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>City Deleted</title>
+</head>
+<body>
+<h2>City Deleted</h2>
+<p>The following city has been deleted:</p>
+<p th:text="${deletedCity.cityName}"></p>
+<p><a th:href="@{/city}">Back to City Menu</a></p>
+</body>
+</html>
