@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>City Form</title>
+    <link href="/styles/city.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>📃 City Form 📃</title>
 </head>
     <body>
-        <h2>Search for a City</h2>
+        <h2>🔎 Search for a City</h2>
         <form method="post" action="/city/search">
             <label for="cityName">City Name:</label>
-            <input type="text" id="city-Name" name="cityName" required>
+            <input type="text" id="city-Name" name="cityName">
             <button type="submit">Search</button>
         </form>
-        <h2>Insert a City</h2>
+        <h2>📝 Insert a City</h2>
         <form method="post" action="/city/insert">
             <label for="cityName">City Name:</label>
             <input type="text" id="cityName" name="cityName" required>
             <button type="submit">Insert</button>
         </form>
+        <a class="button" th:href="@{/dashboard}">Back to Dashboard</a>
     </body>
 </html>

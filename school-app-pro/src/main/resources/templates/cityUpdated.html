@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="/styles/cityUpdated.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
     <title>City Updated</title>
 </head>
 <body>
-<h2>City Updated</h2>
-<p>The city has been updated with the following details:</p>
+<h2>🔁 City Updated 🔁</h2>
+<p>✅ The city has been updated with the following details:</p>
 <ul>
-    <li>ID: <span th:text="${city.cityId}"></span></li>
-    <li>New Name: <span th:text="${city.cityName}"></span></li>
+    <li>🔑 ID: <span th:text="${city.cityId}"></span></li>
+    <li>🏙️ New Name: <span th:text="${city.cityName}"></span></li>
 </ul>
-<p><a href="/city">Back to City List</a></p>
+<br>
+<a class="button" href="/city">Back to City Form</a>
 </body>
 </html>

@@ -38,20 +38,6 @@ public class CityService implements ICityService{
         return cityRepository.save(city);
     }
 
-//    @Override
-//    public City updateCity(City city) throws CityNotFoundException {
-//        // Retrieve the city by ID
-//        city = cityRepository.findById(city.getCityId())
-//                .orElseThrow(() -> new CityNotFoundException());
-//
-//        // Update the city name
-//        city.setCityName(city.getCityName());
-//
-//        // Save the updated city
-//        return city;
-//    }
-
-
     @Override
     public City updateCity(City city) throws CityNotFoundException {
         return cityRepository.save(city);

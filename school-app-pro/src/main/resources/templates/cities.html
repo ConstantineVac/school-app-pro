@@ -2,10 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="/styles/cities.css" rel="stylesheet" type="text/css">
+  <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
   <title>City List</title>
 </head>
 <body>
-<h2>City List</h2>
+<h2>📄 City List 📄</h2>
 <table th:if="${not #lists.isEmpty(cities)}">
   <thead>
   <tr>
@@ -26,6 +28,6 @@
   </tr>
   </tbody>
 </table>
-<a th:href="@{/city}">Back to City Form</a>
+<a class="button" th:href="@{/city}">Back to City Form</a>
 </body>
 </html>

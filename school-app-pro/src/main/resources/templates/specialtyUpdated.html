@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/specialtyUpdated.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Specialty Updated</title>
+</head>
+<body>
+<h2>🔁 Specialty Updated 🔁</h2>
+<p>✅ The specialty has been updated with the following details:</p>
+<ul>
+    <li>🔑 ID: <span th:text="${specialty.specialtyId}"></span></li>
+    <li>💼 New Name: <span th:text="${specialty.specialtyName}"></span></li>
+</ul>
+<br>
+<a class="button" href="/specialty">Back to Specialty Form</a>
+</body>
+</html>

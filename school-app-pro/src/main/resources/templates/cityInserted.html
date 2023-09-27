@@ -2,12 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="/styles/cityInserted.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
     <title>City Inserted</title>
 </head>
-    <body>
-        <h2>City Inserted</h2>
+<body>
+    <h2>📝 City Inserted 📝</h2>
+    <div class="inserted-info">
         <p>The following city has been inserted:</p>
-        <p th:text="${cityName}"></p>
-        <p><a href="/city">Back to City Tab</a></p>
-    </body>
+        <p>🏙️ <span th:text="${cityName}"></span></p>
+    </div>
+    <a th:href="@{/city}">Back to City Menu</a>
+</body>
 </html>

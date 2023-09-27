@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="/styles/specialtyInserted.css" rel="stylesheet" type="text/css">
+  <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+  <title>Specialty Inserted</title>
+</head>
+<body>
+<h2>📝 Specialty Inserted 📝</h2>
+<div class="inserted-info">
+  <p>The following specialty has been inserted:</p>
+  <p>💼 <span th:text="${specialtyName}"></span></p>
+</div>
+<a th:href="@{/specialty}">Back to Specialty Menu</a>
+</body>
+</html>

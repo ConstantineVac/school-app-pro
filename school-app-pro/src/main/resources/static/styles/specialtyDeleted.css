@@ -1,0 +1,51 @@
+/* Body Background Color */
+body {
+    background-color: #512da8;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Center-align text within the body */
+}
+
+/* Heading Text Color */
+h2 {
+    color: #fff;
+    margin-top: 20px; /* Add top margin to create space */
+}
+
+/* Content Styles */
+p {
+    color: white;
+}
+
+.deleted-info {
+    background-color: #5c6bc0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 300px; /* Adjust as needed */
+}
+
+.deleted-info p {
+    color: white;
+    margin: 0;
+}
+
+.deleted-info p:first-child {
+    margin-bottom: 10px;
+}
+
+/* Link Styles */
+a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #d2cbde;
+    color: #512da8;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #e2e2e2;
+    color: #512da8;
+}

@@ -2,15 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="/styles/cityUpdate.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
     <title>Update City</title>
 </head>
 <body>
-<h2>Update City</h2>
+<h2>🔁 Update City 🔁</h2>
+<h3>📝 Changing name for city: <br><br> 🏙️ <span th:text="${city.cityName}"></span></h3>
 <form th:action="@{/city/updateCity/city/{id}(id = ${city.cityId})}" method="post" th:object="${city}">
-    <h3>Changing name for city: <span th:text="${city.cityName}"></span></h3>
 
     <label for="cityId">City ID:</label>
-    <input id="cityId" name="cityId" th:value="${city.cityId}" readonly />
+    <input type="text" id="cityId" name="cityId" th:value="${city.cityId}" readonly />
 
     <label for="cityName">New City Name:</label>
     <input type="text" id="cityName" name="cityName" required />

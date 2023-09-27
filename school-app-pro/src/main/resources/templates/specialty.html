@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/specialty.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>📃 Specialty Form 📃</title>
+</head>
+<body>
+<h2>🔎 Search for a Specialty</h2>
+<form method="post" action="/specialty/search">
+    <label for="specialty-Name">Specialty Name:</label>
+    <input type="text" id="specialty-Name" name="specialtyName">
+    <button type="submit">Search</button>
+</form>
+<h2>📝 Insert a Specialty</h2>
+<form method="post" action="/specialty/insert">
+    <label for="specialtyName">Specialty Name:</label>
+    <input type="text" id="specialtyName" name="specialtyName" required>
+    <button type="submit">Insert</button>
+</form>
+<a class="button" th:href="@{/dashboard}">Back to Dashboard</a>
+</body>
+</html>

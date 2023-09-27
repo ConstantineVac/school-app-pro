@@ -31,18 +31,21 @@ public class CityController {
         return modelAndView;
     }
 
-    @GetMapping("/city/cities")
-    public List<City> getAllCities() {
-        return cityService.getAllCities();
-    }
-
     @PostMapping("/city/search")
-    public ModelAndView searchCities(@RequestParam("cityName") String cityName) {
-        List<City> cities = cityService.searchCities(cityName);
-        ModelAndView modelAndView = new ModelAndView("cities"); // Use the "cities" view
-        modelAndView.addObject("cities", cities); // Add search results to the view
+    public ModelAndView searchCities(@RequestParam(value = "cityName", required = false) String cityName) {
+        List<City> cities;
+
+        if (cityName != null && !cityName.trim().isEmpty()) {
+            cities = cityService.searchCities(cityName);
+        } else {
+            cities = cityService.getAllCities();
+        }
+
+        ModelAndView modelAndView = new ModelAndView("cities");
+        modelAndView.addObject("cities", cities);
         return modelAndView;
     }
+
 
     @PostMapping("/city/insert")
     public ModelAndView insertCity(@RequestParam("cityName") String cityName) {
@@ -55,7 +58,7 @@ public class CityController {
 
     @GetMapping (value = "/editCity/{id}")
     public ModelAndView editCity(@PathVariable("id") String cityId) {
-        ModelAndView modelAndView = new ModelAndView("cityFormEdit2Update");
+        ModelAndView modelAndView = new ModelAndView("cityUpdate");
         Long cId = Long.parseLong(cityId);
         City formCity = cityRepository.getCityById(cId);
         modelAndView.addObject("city", formCity); // Add cityId to the model
@@ -78,15 +81,6 @@ public class CityController {
         return "cityUpdated";
     }
 
-
-
-    // In your service or a utility class
-    public CityUpdateDTO mapCityToDTO(City city) {
-        CityUpdateDTO dto = new CityUpdateDTO();
-        dto.setCityId(city.getCityId());
-        dto.setCityName(city.getCityName());
-        return dto;
-    }
 
     @RequestMapping(value = "/city/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public ModelAndView deleteCity(@RequestParam("cityId") Long cityId) {

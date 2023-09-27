@@ -32,11 +32,11 @@ h1 {
     text-align: center;
     text-decoration: none;
     color: #fff;
-    background-color: #4CAF50;
+    background-color: #744bda;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .control-btn:hover {
-    background-color: #45a049;
+    background-color: #4c2ba1;
 }

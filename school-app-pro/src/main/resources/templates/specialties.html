@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/specialties.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Specialty List</title>
+</head>
+<body>
+<h2>📄 Specialty List 📄</h2>
+<table th:if="${not #lists.isEmpty(specialties)}">
+    <thead>
+    <tr>
+        <th>Specialty Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of cities -->
+    <tr th:each="specialty : ${specialties}">
+        <td th:text="${specialty.specialtyName}">Specialty Name</td>
+        <td>
+            <!-- Update button -->
+            <a th:href="@{/editSpecialty/{id}(id = ${specialty.specialtyId})}">Update</a>
+            <!-- Delete button -->
+            <a th:href="@{/specialty/delete(specialtyId=${specialty.specialtyId})}" onclick="return confirm('Are you sure you want to delete this specialty?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a class="button" th:href="@{/specialty}">Back to Specialty Form</a>
+</body>
+</html>

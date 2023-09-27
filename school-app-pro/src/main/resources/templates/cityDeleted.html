@@ -2,12 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="/styles/cityDeleted.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
     <title>City Deleted</title>
 </head>
 <body>
-<h2>City Deleted</h2>
-<p>The following city has been deleted:</p>
-<p th:text="${deletedCity.cityName}"></p>
-<p><a th:href="@{/city}">Back to City Menu</a></p>
+    <h2>🗑️ City Deleted 🗑️</h2>
+    <div class="deleted-info">
+        <p>The following city has been deleted:</p>
+        <p>🏙️ <span th:text="${deletedCity.cityName}"></span></p>
+    </div>
+    <a th:href="@{/city}">Back to City Menu</a>
 </body>
 </html>

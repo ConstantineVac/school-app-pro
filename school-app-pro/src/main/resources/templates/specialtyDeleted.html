@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/specialtyDeleted.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Specialty Deleted</title>
+</head>
+<body>
+<h2>🗑️ Specialty Deleted 🗑️</h2>
+<div class="deleted-info">
+    <p>The following specialty has been deleted:</p>
+    <p>💼 <span th:text="${deletedSpecialty.specialtyName}"></span></p>
+</div>
+<a th:href="@{/specialty}">Back to Specialty Menu</a>
+</body>
+</html>

@@ -1,0 +1,55 @@
+/* Body Background Color */
+body {
+    background-color: #512da8;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Center-align text within the body */
+}
+
+/* Heading Text Color */
+h2, h3 {
+    color: #fff;
+    margin-top: 30px; /* Add top margin to create space */
+}
+
+/* Form Styles */
+form {
+    margin: 20px auto;
+    max-width: 300px;
+    padding: 20px;
+    background-color: #5c6bc0;
+    border-radius: 10px;
+}
+
+/* Label Styles */
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+    margin-top: 20px;
+}
+
+/* Input Styles */
+input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    background-color: #512da8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e2e2e2;
+    color: #512da8;
+}

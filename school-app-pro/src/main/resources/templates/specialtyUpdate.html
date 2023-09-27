@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="/styles/specialtyUpdate.css" rel="stylesheet" type="text/css">
+  <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+  <title>Update Specialty</title>
+</head>
+<body>
+<h2>🔁 Update Specialty 🔁</h2>
+<h3>📝 Changing name for specialty: <br><br> 💼 <span th:text="${specialty.specialtyName}"></span></h3>
+<form th:action="@{/specialty/updateSpecialty/specialty/{id}(id = ${specialty.specialtyId})}" method="post" th:object="${specialty}">
+
+  <label for="specialtyId">Specialty ID:</label>
+  <input type="text" id="specialtyId" name="specialtyId" th:value="${specialty.specialtyId}" readonly />
+
+  <label for="specialtyName">New Specialty Name:</label>
+  <input type="text" id="specialtyName" name="specialtyName" required />
+
+  <button type="submit">Update</button>
+</form>
+</body>
+</html>
+
