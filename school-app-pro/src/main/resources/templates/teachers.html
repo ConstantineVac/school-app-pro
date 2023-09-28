@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teachers.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Teacher List</title>
+</head>
+<body>
+<h2>📄 Teacher List 📄</h2>
+<table th:if="${not #lists.isEmpty(teachers)}">
+    <thead>
+    <tr>
+        <th>SSN</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Specialty</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of cities -->
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.ssn}">SSN</td>
+        <td th:text="${teacher.firstname}">Firstname</td>
+        <td th:text="${teacher.lastname}">Lastname</td>
+        <td th:text="${teacher.specialty?.specialtyName}">Specialty</td>
+        <td>
+            <!-- Update button -->
+            <a th:href="@{/editTeacher/{id}(id = ${teacher.teacherId})}">Update</a>
+            <!-- Delete button -->
+            <a th:href="@{/teacher/delete(teacherId=${teacher.teacherId})}" onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a class="button" th:href="@{/teacher}">Back to Teacher Form</a>
+</body>
+</html>

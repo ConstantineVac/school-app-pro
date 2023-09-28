@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherUpdated.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Student Updated Successfully</title>
+</head>
+<body>
+<h2>🔁 Student Updated 🔁</h2>
+<p>✅ Student has been updated with the following details:</p>
+<ul>
+
+    <li>🧑🏻‍🎓 Firstname: <span th:text="${firstname}"></span></li>
+    <li>🧑🏻‍🎓 Lastname: <span th:text="${lastname}"></span></li>
+    <li>🏙️ City: <span th:text="${city}"></span></li>
+    <li>🗓️ Birthday: <span th:text="${birthday}"></span></li>
+</ul>
+<br>
+<a class="button" href="/student">Back to Student Form</a>
+</body>
+</html>

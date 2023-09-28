@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="/styles/teachers.css" rel="stylesheet" type="text/css">
+  <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+  <title>Student List</title>
+</head>
+<body>
+<h2>📄 Student List 📄</h2>
+<table th:if="${not #lists.isEmpty(students)}">
+  <thead>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Specialty</th>
+    <th>Birthday</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Loop through the list of cities -->
+  <tr th:each="student : ${students}">
+    <td th:text="${student.firstname}">Firstname</td>
+    <td th:text="${student.lastname}">Lastname</td>
+    <td th:text="${student.city?.cityName}">City</td>
+    <td th:text="${student.birthday}">Birthday</td>
+    <td>
+      <!-- Update button -->
+      <a th:href="@{/editStudent/{id}(id = ${student.studentId})}">Update</a>
+      <!-- Delete button -->
+      <a th:href="@{/student/delete(studentId=${student.studentId})}" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a class="button" th:href="@{/student}">Back to Student Form</a>
+</body>
+</html>

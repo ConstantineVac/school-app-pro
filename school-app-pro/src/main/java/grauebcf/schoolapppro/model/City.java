@@ -27,4 +27,5 @@ public class City {
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<>();
+
 }

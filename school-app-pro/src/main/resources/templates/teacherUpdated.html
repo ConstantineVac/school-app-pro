@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherUpdated.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Teacher Updated Successfully</title>
+</head>
+<body>
+<h2>🔁 Teacher Updated 🔁</h2>
+<p>✅ Teacher has been updated with the following details:</p>
+<ul>
+    <li>🔑 SSN: <span th:text="${ssn}"></span></li>
+    <li>👨🏻‍🏫 Firstname: <span th:text="${firstname}"></span></li>
+    <li>👨🏻‍🏫 Lastname: <span th:text="${lastname}"></span></li>
+    <li>💼 Specialty: <span th:text="${specialty}"></span></li>
+</ul>
+<br>
+<a class="button" href="/teacher">Back to Teacher Form</a>
+</body>
+</html>

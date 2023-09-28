@@ -1,0 +1,64 @@
+/* Body Background Color */
+body {
+    background-color: #512da8;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Heading Text Color */
+h2 {
+    color: #fff;
+    margin-top: 20px; /* Add top margin to create space */
+}
+
+/* Content Styles */
+p {
+    margin-top: 60px;
+    color: white;
+    text-align: center;
+    margin-left: -65px;
+}
+
+.button {
+    text-align: center;
+    margin-left: 0px;
+    margin-top: 20px;
+}
+
+ul {
+    background-color: #5c6bc0;
+    border: none;
+    border-radius: 5px;
+    width: 25%;
+    text-align: left;
+    list-style-type: circle;
+    margin-left: 33.5%;
+    padding-right: 10px;
+    margin-bottom: 35px;
+}
+
+li {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+/* Link Styles */
+a {
+    color: #fff;
+    text-decoration: none;
+    background-color: #512da8;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a.button {
+    background-color: #d2cbde;
+    color: #512da8;
+}
+
+a:hover {
+    background-color: #e2e2e2;
+    color: #512da8;
+}

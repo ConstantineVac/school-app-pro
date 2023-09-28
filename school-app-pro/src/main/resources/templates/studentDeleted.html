@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherDeleted.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Student Deleted</title>
+</head>
+<body>
+<h2>🗑️ Student Deleted 🗑️</h2>
+<div class="deleted-info">
+    <p>The following student has been deleted:</p>
+    <p>🔑 ID: <span th:text="${deletedStudent.studentId}"></span></p>
+    <p>🧑🏻‍🎓 Firstname: <span th:text="${deletedStudent.firstname}"></span></p>
+    <p>🧑🏻‍🎓 Lastname: <span th:text="${deletedStudent.lastname}"></span></p>
+    <p>🏙️ City ID: <span th:text="${cityId}"></span></p>
+    <p>🗓️ Birthday: <span th:text="${deletedStudent.birthday}"></span></p>
+</div>
+<a th:href="@{/student}">Back to Student Menu</a>
+</body>
+</html>

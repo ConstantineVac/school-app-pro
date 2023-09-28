@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacher.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>📃 Student Form 📃</title>
+</head>
+<body>
+<h2>🔎 Search for a Student</h2>
+<form method="post" action="/student/search">
+    <label for="studentLastName">Student Lastname:</label>
+    <input type="text" id="studentLastName" name="studentLastName">
+    <button type="submit">Search</button>
+</form>
+
+<h2>📝 Insert a Student</h2>
+<form method="post" action="/student/insert">
+
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="firstname" required><br>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname" required><br>
+
+
+    <label for="city">City:</label>
+    <select id="city" name="cityId" required>
+        <option th:each="city : ${cities}"
+                th:value="${city.cityId}"
+                th:text="${city.cityName}">
+        </option>
+    </select>
+
+    <label for="birthday">Birthday(YYYY-MM-DD):</label>
+    <input type="text" id="birthday" name="birthday" required><br>
+    <br>
+    <br>
+    <button type="submit">Insert</button>
+</form>
+<a class="button" th:href="@{/dashboard}">Back to Dashboard</a>
+</body>
+</html>

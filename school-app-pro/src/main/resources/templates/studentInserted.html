@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherInserted.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Student Inserted</title>
+</head>
+<body>
+<h2>📝 Student Inserted 📝</h2>
+<div class="inserted-info">
+    <p>The following student has been inserted:</p>
+    <p>🧑🏻‍🎓 <strong>Firstname:</strong> <span th:text="${firstname}"></span></p>
+    <p>🧑🏻‍🎓 <strong>Firstname:</strong> <span th:text="${lastname}"></span></p>
+    <p>🏙️ <strong>City:</strong> <span th:text="${city}"></span></p>
+    <p>🗓️ <strong>Birthday:</strong> <span th:text="${birthday}"></span></p>
+
+</div>
+<a th:href="@{/student}">Back to Student Menu</a>
+</body>
+</html>

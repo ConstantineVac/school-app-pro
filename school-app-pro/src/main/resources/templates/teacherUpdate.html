@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherUpdate.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Update Teacher</title>
+</head>
+<body>
+<h2>🔁 Update Teacher 🔁</h2>
+<h3>📝 Changing Teacher: <br><br> 👨🏻‍🏫 <span th:text="${teacher.lastname}"></span></h3>
+
+<form th:action="@{/teacher/updateTeacher/teacher/{id}(id = ${teacher.teacherId})}" method="post" th:object="${teacher}">
+
+    <label for="teacherId">Teacher ID:</label>
+    <input type="text" id="teacherId" name="teacherId" th:value="${teacher.teacherId}" readonly />
+
+    <label for="firstname">New Firstname:</label>
+    <input type="text" id="firstname" name="firstname" required />
+
+    <label for="lastname">New Lastname:</label>
+    <input type="text" id="lastname" name="lastname" required />
+
+    <label for="ssn">New SSN:</label>
+    <input type="text" id="ssn" name="ssn" required />
+
+    <label for="specialtyId">New Specialty:</label>
+    <select id="specialtyId" name="specialtyId" th:value="*{specialty?.specialtyId}" required>
+        <option th:each="specialty : ${specialties}"
+                th:value="${specialty.specialtyId}"
+                th:text="${specialty.specialtyName}">
+        </option>
+    </select>
+    <br>
+    <br>
+
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

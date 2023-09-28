@@ -25,10 +25,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #414040;
+    background-color: #8f60bb;
     position: sticky;
     top: 0;
     padding: 10px; /* Add padding for the login button */
+    border-radius: 10px;
 }
 
 .logo > img {

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacher.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>📃 Teacher Form 📃</title>
+</head>
+<body>
+<h2>🔎 Search for a Teacher</h2>
+<form method="post" action="/teacher/search">
+    <label for="teacherLastName">Teacher Lastname:</label>
+    <input type="text" id="teacherLastName" name="teacherLastName">
+    <button type="submit">Search</button>
+</form>
+
+<h2>📝 Insert a Teacher</h2>
+<form method="post" action="/teacher/insert">
+    <label for="ssn">SSN:</label>
+    <input type="text" id="ssn" name="ssn" required><br>
+
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="firstname" required><br>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname" required><br>
+
+
+    <label for="specialty">Specialty:</label>
+    <select id="specialty" name="specialtyId" required>
+        <option th:each="specialty : ${specialties}"
+                th:value="${specialty.specialtyId}"
+                th:text="${specialty.specialtyName}">
+        </option>
+    </select>
+    <br>
+    <br>
+    <button type="submit">Insert</button>
+</form>
+<a class="button" th:href="@{/dashboard}">Back to Dashboard</a>
+
+
+
+<!--<script>-->
+<!--    function updateSelectedSpecialtyId(selectElement) {-->
+<!--        var selectedOption = selectElement.options[selectElement.selectedIndex];-->
+<!--        var selectedSpecialtyId = selectedOption.value;-->
+<!--        document.getElementById("selectedSpecialtyId").value = selectedSpecialtyId;-->
+<!--    }-->
+<!--</script>-->
+
+</body>
+</html>

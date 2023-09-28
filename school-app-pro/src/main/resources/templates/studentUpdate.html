@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherUpdate.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Update Student</title>
+</head>
+<body>
+<h2>🔁 Update Student 🔁</h2>
+<h3>📝 Changing Student: <br><br> 🧑🏻‍🎓 <span th:text="${student.lastname}"></span></h3>
+
+<form th:action="@{/student/updateStudent/student/{id}(id = ${student.studentId})}" method="post" th:object="${student}">
+
+    <label for="studentId">Student ID:</label>
+    <input type="text" id="studentId" name="studentId" th:value="${student.studentId}" readonly />
+
+    <label for="firstname">New Firstname:</label>
+    <input type="text" id="firstname" name="firstname" required />
+
+    <label for="lastname">New Lastname:</label>
+    <input type="text" id="lastname" name="lastname" required />
+
+    <label for="cityId">New City:</label>
+    <select id="cityId" name="cityId" th:value="*{city.cityId}" required>
+        <option th:each="city : ${cities}"
+                th:value="${city.cityId}"
+                th:text="${city.cityName}">
+        </option>
+    </select>
+
+    <label for="birthday">Birthday(YYYY-MM-DD):</label>
+    <input type="text" id="birthday" name="birthday" required><br>
+    <br>
+    <br>
+
+    <button type="submit">Update</button>
+</form>
+<a class="button" th:href="@{/student}">Back to Student Menu</a>
+</body>
+</html>
