@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherDeleted.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Meeting Deleted Successfully</title>
+</head>
+<body>
+<h2>🗑️ Meeting Deleted 🗑️</h2>
+<div class="deleted-info">
+    <p>The following meeting has been deleted:</p>
+    <p>🔑 ID: <span th:text="${deletedMeeting.meetingId}"></span></p>
+    <p>🗓️ Meeting Date: <span th:text="${deletedMeeting.meetingDate}"></span></p>
+    <p>👨🏻‍🏫 Teacher: <span th:text="${deletedMeeting.teacher.teacherId}"></span></p>
+    <p>🧑🏻‍🎓 Student: <span th:text="${deletedMeeting.student.studentId}"></span></p>
+<!--    <p>👨🏻‍🏫 Teacher: <span th:text="${deletedMeeting.teacher.lastname}"></span></p>-->
+<!--    <p>🧑🏻‍🎓 Student: <span th:text="${deletedMeeting.student.lastname}"></span></p>-->
+</div>
+<a th:href="@{/meeting}">Back to Meeting Menu</a>
+</body>
+</html>

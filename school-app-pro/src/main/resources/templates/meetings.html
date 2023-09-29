@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teachers.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Meetings List</title>
+</head>
+<body>
+<h2>📄 Meetings List 📄</h2>
+<table th:if="${not #lists.isEmpty(meetings)}">
+    <thead>
+    <tr>
+        <th>Meeting Date</th>
+        <th>Classroom</th>
+        <th>Teacher</th>
+        <th>Student</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of meetings -->
+    <tr th:each="meeting : ${meetings}">
+        <td th:text="${meeting.meetingDate}">Meeting Date</td>
+        <td th:text="${meeting.classroom}">Classroom</td>
+        <td th:text="${meeting.teacher?.lastname}">Teacher</td>
+        <td th:text="${meeting.student?.lastname}">Student</td>
+        <td>
+            <!-- Update button -->
+            <a th:href="@{/editMeeting/{id}(id = ${meeting.meetingId})}">Update</a>
+            <!-- Delete button -->
+            <a th:href="@{/meeting/delete(meetingId=${meeting.meetingId})}" onclick="return confirm('Are you sure you want to delete this meeting?')">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a class="button" th:href="@{/meeting}">Back to Meeting Form</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherInserted.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Meeting Inserted Successfully</title>
+</head>
+<body>
+<h2>📝 Meeting Inserted 📝</h2>
+<div class="inserted-info">
+    <p>The following meeting has been inserted:</p>
+    <p>🗓️ <strong>Meeting Date:</strong> <span th:text="${meetingDate}"></span></p>
+    <p>🏫 <strong>Classroom:</strong> <span th:text="${classroom}"></span></p>
+    <p>👨🏻‍🏫 <strong>Teacher:</strong> <span th:text="${teacher}"></span></p>
+    <p>🧑🏻‍🎓 <strong>Student:</strong> <span th:text="${student}"></span></p>
+
+</div>
+<a th:href="@{/meeting}">Back to Student Menu</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/teacherUpdated.css" rel="stylesheet" type="text/css">
+    <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+    <title>Meeting Updated Successfully</title>
+</head>
+<body>
+<h2>🔁 Meeting Updated 🔁</h2>
+<p>✅ Meeting has been updated with the following details:</p>
+<ul>
+    <li>🗓️ Meeting Date: <span th:text="${meetingDate}"></span></li>
+    <li>🏫 Classroom: <span th:text="${classroom}"></span></li>
+    <li>👨🏻‍🏫 Teacher: <span th:text="${teacher}"></span></li>
+    <li>🧑🏻‍🎓 Student: <span th:text="${student}"></span></li>
+
+</ul>
+<br>
+<a class="button" href="/meeting">Back to Meeting Menu</a>
+</body>
+</html>

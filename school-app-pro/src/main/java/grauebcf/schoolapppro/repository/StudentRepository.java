@@ -12,9 +12,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findStudentByLastname(String lastname);
 
     @Query("SELECT s FROM Student s WHERE s.lastname LIKE %:lastName%")
-    List<Student> getStudentsByLastname(@Param("lastName") String lastname); // Use List<Student> instead of Student
+    List<Student> getStudentsByLastname(@Param("lastName") String lastname); // Use List<Student> instead of Student, might return multiple results.
 
-    @Query("SELECT s FROM Student s WHERE s.studentId = :studentId") // Updated query parameter syntax
+    @Query("SELECT s FROM Student s WHERE s.studentId = :studentId")
     Student getStudentsByStudentId(@Param("studentId") Long studentId);
 
 }

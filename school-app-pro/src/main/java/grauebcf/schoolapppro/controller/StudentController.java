@@ -61,7 +61,7 @@ public class StudentController {
 
 
     @PostMapping("/student/insert")
-    public String saveTeacher(
+    public String saveStudent(
             @RequestParam("firstname") String firstname,
             @RequestParam("lastname") String lastname,
             @RequestParam("cityId") Long cityId,
@@ -78,6 +78,7 @@ public class StudentController {
 
         student.setBirthday(LocalDate.parse(birthday));
 
+        // save the new student.
         studentService.insertStudent(student);
 
         // Add Student data to the model
@@ -178,12 +179,12 @@ public class StudentController {
     @RequestMapping(value = "/student/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public ModelAndView deleteStudent(@RequestParam("studentId") Long studentId) {
         Student deletedStudent;
-        Long cityId = null; // Initialize specialtyId to null
+        Long cityId = null; // Initialize cityId to null
 
         try {
             deletedStudent = studentRepository.getStudentsByStudentId(studentId); // Retrieve the teacher before deletion
 
-            // Store the specialtyId from the deleted teacher
+            // Store the cityId from the deleted teacher
             if (deletedStudent != null && deletedStudent.getCity() != null) {
                 cityId = cityRepository.getCityById(deletedStudent.getCity().getCityId()).getCityId();
             }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="/styles/teacherUpdate.css" rel="stylesheet" type="text/css">
+  <link rel="icon" th:href="@{/img/icons8-school-16.png}" type="image/png" sizes="16x16" href="/img/icons8-school-16.png">
+  <title>Update Meeting</title>
+</head>
+<body>
+<h2>🔁 Update Meeting 🔁</h2>
+<h3>📝 Changing Meeting: <br><br> 🔑 <span th:text="${meeting.meetingId}"></span></h3>
+
+<form th:action="@{/meeting/updateMeeting/meeting/{id}(id = ${meeting.meetingId})}" method="post" th:object="${meeting}">
+
+  <label for="meetingId">Meeting ID:</label>
+  <input type="text" id="meetingId" name="meetingId" th:value="${meeting.meetingId}" readonly />
+
+  <label for="meetingDate">New Meeting Date(YYYY-MM-DD):</label>
+  <input type="text" id="meetingDate" name="meetingDate" required><br>
+
+  <label for="classroom">New Classroom:</label>
+  <input type="text" id="classroom" name="classroom" required />
+
+  <label for="teacherId">New Teacher:</label>
+  <select id="teacherId" name="teacherId" th:value="*{teacher.teacherId}" required>
+    <option th:each="teacher : ${teachers}"
+            th:value="${teacher.teacherId}"
+            th:text="${teacher.lastname}">
+    </option>
+  </select>
+
+  <label for="studentId">New Student:</label>
+  <select id="studentId" name="studentId" th:value="*{student.studentId}" required>
+    <option th:each="student : ${students}"
+            th:value="${student.studentId}"
+            th:text="${student.lastname}">
+    </option>
+  </select>
+  <br>
+  <br>
+
+  <button type="submit">Update</button>
+</form>
+<a class="button" th:href="@{/meeting}">Back to Meeting Menu</a>
+</body>
+</html>
