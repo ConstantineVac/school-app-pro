@@ -42,7 +42,7 @@ public class TeacherController {
     }
 
     @PostMapping("/teacher/search")
-    public ModelAndView searchTeachers(@RequestParam(value = "lastname", required = false) String lastname) {
+    public ModelAndView searchTeachers(@RequestParam(value = "teacherLastName", required = false) String lastname) {
         List<Teacher> teachers;
 
         if (lastname != null && !lastname.trim().isEmpty()) {

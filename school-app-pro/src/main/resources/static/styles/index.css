@@ -2,7 +2,7 @@
     --white: #f9f9f9;
     --black: #36383f;
     --grey: #85888c;
-    --brown: #762124;
+    --brown: #d7c8e5;
 }
 
 * {
@@ -62,10 +62,10 @@
 
 
 /* If needed, you can add a hover effect to the icon */
-.login-icon:hover {
+#login:hover {
     cursor: pointer;
     text-decoration: none; /* Remove the underline on the anchor tag */
-    color: white; /* Set the icon color to white */
+    color: #f59dff; /* Set the icon color to white */
 }
 
 .login-icon a:hover,
@@ -74,7 +74,7 @@
 }
 
 #login {
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
 }
 
@@ -116,16 +116,17 @@
 
 .dropdown-content {
     display: none;
-    width: 140px;
+    width: 110px;
     position: absolute;
     top: 0;
-    left: -10px;
+    left: 0px;
     padding-top: 50px;
-    background-color: brown;
+    background-color: #d7c8e5;
     list-style: none;
     flex-direction: column;
     justify-content: space-around;
     align-self: flex-start;
+    border-radius: 5px;
 }
 
 .dropdown-content > li {
@@ -144,10 +145,11 @@
     text-decoration: none;
     font-size: 1.2rem;
     padding: 10px 10px;
+
 }
 
 .dropdown-content a:hover{
-    background-color: rgb(226, 178, 178);
+    background-color: #8f60bb;
 }
 
 .dropdown > a {
@@ -172,7 +174,9 @@ img {
     transform: translate(-50%, -50%);
     overflow: hidden;
     white-space: nowrap; /* Prevent span from wrapping to the next line */
-    font-size: 2.5rem;
+    font-size: 4.5rem;
+    text-shadow: 5px 5px 10px #36383f; /* You can adjust the shadow size and color here */
+
 }
 
 .tag2 {
@@ -182,7 +186,9 @@ img {
     transform: translate(-50%, -50%);
     overflow: hidden;
     white-space: nowrap; /* Prevent span from wrapping to the next line */
-    font-size: 2.5rem;
+    font-size: 4.5rem;
+    text-shadow: 5px 5px 10px #36383f; /* You can adjust the shadow size and color here */
+
 }
 
 @media (max-width: 1000px) {
@@ -197,7 +203,7 @@ img {
 
 span {
     color: white;
-    font-size: 2.5rem;
+    font-size: 4.5rem;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
@@ -243,7 +249,7 @@ span {
 }
 
 .social-links > a {
-    color: blue;
+    color: #84e0e0;
     font-size: 30px;
 }
 

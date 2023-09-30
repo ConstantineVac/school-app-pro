@@ -44,8 +44,25 @@ public class StudentController {
         return modelAndView;
     }
 
+//    @PostMapping("/student/search")
+//    public ModelAndView searchStudents(@RequestParam(value = "lastname", required = false) String lastname) {
+//        List<Student> students;
+//
+//        if (lastname != null && !lastname.trim().isEmpty()) {
+//            students = studentService.searchStudents(lastname);
+//        } else {
+//            students = studentService.getAllStudents();
+//        }
+//
+//        ModelAndView modelAndView = new ModelAndView("students");
+//        modelAndView.addObject("students", students);
+//        return modelAndView;
+//    }
+
     @PostMapping("/student/search")
-    public ModelAndView searchStudents(@RequestParam(value = "lastname", required = false) String lastname) {
+    public ModelAndView searchStudents(@RequestParam(value = "studentLastName", required = false) String lastname) {
+        System.out.println("Lastname parameter: " + lastname); // Debugging statement
+
         List<Student> students;
 
         if (lastname != null && !lastname.trim().isEmpty()) {
@@ -53,6 +70,8 @@ public class StudentController {
         } else {
             students = studentService.getAllStudents();
         }
+
+        System.out.println("Number of students found: " + students.size()); // Debugging statement
 
         ModelAndView modelAndView = new ModelAndView("students");
         modelAndView.addObject("students", students);

@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
+    @Query("SELECT s FROM Student s WHERE s.lastname LIKE %:lastname%")
     List<Student> findStudentByLastname(String lastname);
 
     @Query("SELECT s FROM Student s WHERE s.lastname LIKE %:lastName%")

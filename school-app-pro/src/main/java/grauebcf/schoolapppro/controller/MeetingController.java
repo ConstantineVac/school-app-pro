@@ -59,7 +59,7 @@ public class MeetingController {
     }
 
     @PostMapping("/meeting/search")
-    public ModelAndView searchMeetings(@RequestParam(value = "classroom", required = false) String classroom) {
+    public ModelAndView searchMeetings(@RequestParam(value = "meetingClassroom", required = false) String classroom) {
         List<Meeting> meetings;
 
         if (classroom != null && !classroom.trim().isEmpty()) {

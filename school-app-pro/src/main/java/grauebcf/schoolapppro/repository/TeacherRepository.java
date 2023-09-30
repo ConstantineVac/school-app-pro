@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
+    @Query("SELECT t FROM Teacher t WHERE t.lastname like %:lastname%")
     List<Teacher> findTeachersByLastname(String lastname);
 
     @Query("SELECT t FROM Teacher t WHERE t.lastname like %:lastName%")
