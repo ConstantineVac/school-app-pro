@@ -1,109 +1,158 @@
 package grauebcf.schoolapppro.controller;
 
+import grauebcf.schoolapppro.authentication.CustomAuthenticationSuccessHandler;
 import grauebcf.schoolapppro.dto.UserRegisterDTO;
 import grauebcf.schoolapppro.model.User;
 import grauebcf.schoolapppro.repository.UserRepository;
+import grauebcf.schoolapppro.service.ISecurityService;
 import grauebcf.schoolapppro.service.UserService;
+import grauebcf.schoolapppro.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.security.Principal;
+
 @Controller
 public class AuthController {
 
+    private final UserValidator userValidator;
     private final UserRepository userRepository;
     private final UserService userService;
 
+    private final PasswordEncoder passwordEncoder;
+    private final ISecurityService securityService;
+    private final AuthenticationManager authenticationManager;
     @Autowired
-    public AuthController(UserRepository userRepository, UserService userService) {
+    public AuthController(UserRepository userRepository,
+                          UserService userService,
+                          PasswordEncoder passwordEncoder,
+                          ISecurityService securityService,
+                          AuthenticationManager authenticationManager,
+                          UserValidator userValidator) {
+
         this.userRepository = userRepository;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.securityService = securityService;
+        this.userValidator = userValidator;
+        this.authenticationManager = authenticationManager;
     }
 
 
-    @GetMapping("/login")
-    public ModelAndView showLoginForm(@RequestParam(name = "error", required = false) String error,
-                                      @RequestParam(name = "registration", required = false) String registration) {
-        ModelAndView modelAndView = new ModelAndView("login"); // Assuming you have a login.html template
-
-        // Add any error or registration success messages to the model
-        if (error != null) {
-            modelAndView.addObject("error", "Authentication failed. Please check your credentials.");
-        }
-        if (registration != null) {
-            modelAndView.addObject("registration", "Registration successful. You can now log in.");
+    @GetMapping(path = "/login")
+    public String login(Principal principal, HttpServletRequest request, Model model) {
+        String referer = request.getHeader("Referer");
+        request.getSession().setAttribute(CustomAuthenticationSuccessHandler.REDIRECT_URL, referer);
+        // Check if an error message should be displayed
+        String errorMessage = (String) request.getSession().getAttribute("loginErrorMessage");
+        if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
+            request.getSession().removeAttribute("loginErrorMessage"); // Remove the message from the session
         }
 
-        return modelAndView;
+        return principal == null ? "login" : "redirect:/dashboard";
     }
+
+
+
+
+//    @GetMapping(path = "/index")
+//    public String root(Principal principal) {
+//        return principal == null ? "login" : "redirect:/dashboard"; // Change to "/dashboard"
+//    }
+
+
 
     @PostMapping("/authenticate")
-    public String authenticate(@RequestParam("formType") String formType,
-                               @RequestParam(name = "email", required = false) String email,
-                               @RequestParam(name = "password", required = false) String password) {
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
+    public String processRegistrationForm(@Valid @ModelAttribute("userRegisterDTO") UserRegisterDTO userRegisterDTO, BindingResult result) {
+        userValidator.validate(userRegisterDTO, result);
 
-        if ("login".equals(formType)) {
-            // Implement your authentication logic here, such as checking the email and password
-            // against a user database or using Spring Security
-
-            // For example, if authentication is successful, you can set a boolean flag like this:
-            boolean authenticated = authenticateUser(email, password);
-
-            if (authenticated) {
-                // Store user details in the session (you need to implement this part)
-                // Example: SecurityContextHolder.getContext().setAuthentication(authentication);
-                return "redirect:/dashboard"; // Redirect to the dashboard on successful login
-            } else {
-                // Handle authentication failure, e.g., display an error message
-                return "redirect:/login?error=true";
-            }
-        } else if ("register".equals(formType)) {
-            // Implement your registration logic here, such as saving user details
-            // to a user database
-
-            // For example, if registration is successful, you can set a boolean flag like this:
-            boolean registered = registerUser(email, password);
-
-            if (registered) {
-                return "redirect:/login?registration=success";
-            } else {
-                // Handle registration failure, e.g., display an error message
-                return "redirect:/login?registration=failed";
-            }
+        if (result.hasErrors()) {
+            return "login";
         }
-        return "redirect:/login"; // Default to login page
+
+        //     Encode the user's password using BCrypt
+        String rawPassword = userRegisterDTO.getPassword();
+        String encodedPassword = passwordEncoder.encode(rawPassword);
+        userRegisterDTO.setPassword(encodedPassword);
+
+        User createdUser = userService.registerUser(userRegisterDTO);
+
+        // login with the newly created account and redirect to search page
+        securityService.autoLogin(createdUser);
+
+        return "redirect:/dashboard";
     }
 
-    // Replace this with your actual authentication logic
-    private boolean authenticateUser(String email, String password) {
-        // Retrieve the user by email from the database
-        User user = userRepository.getUserByEmail(email);
 
-        // Check if the user exists and the provided password matches the stored password
-        if (user != null && user.getPassword().equals(password)) {
-            return true; // Authentication successful
-        }
+    @GetMapping("/authenticate")
+    public String showRegistrationForm(Model model) {
+        // Create a new UserRegisterDTO object and add it to the model
+        UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
+        model.addAttribute("userRegisterDTO", userRegisterDTO);
 
-        return false; // Authentication failed
-    }
-
-    // Replace this with your actual registration logic
-    private boolean registerUser(String email, String password) {
-        // Check if the email is already registered
-        if (userRepository.emailExists(email)) {
-            return false; // Registration failed (email already exists)
-        }
-
-        // Create a new User object and save it to the database
-        UserRegisterDTO newUser = new UserRegisterDTO(email, password);
-        userService.registerUser(newUser);
-
-        return true; // Registration successful
+        return "login"; // Assuming userLogin.html contains both login and registration forms
     }
 
 }
+
+//@Controller
+//public class AuthController {
+//
+//    private final UserRepository userRepository;
+//    private final UserService userService;
+//
+//    @Autowired
+//    public AuthController(UserRepository userRepository, UserService userService) {
+//        this.userRepository = userRepository;
+//        this.userService = userService;
+//    }
+//
+//    @GetMapping("/login")
+//    public ModelAndView showLoginForm(@RequestParam(name = "error", required = false) String error,
+//                                      @RequestParam(name = "registration", required = false) String registration) {
+//        ModelAndView modelAndView = new ModelAndView("login");
+//
+//        // Add any error or registration success messages to the model
+//        if (error != null) {
+//            modelAndView.addObject("error", "Authentication failed. Please check your credentials.");
+//        }
+//        if (registration != null) {
+//            modelAndView.addObject("registration", "Registration successful. You can now log in.");
+//        }
+//
+//        return modelAndView;
+//    }
+//
+//    @PostMapping("/login")
+//    public String login(@RequestParam("email") String email,
+//                        @RequestParam("password") String password) {
+//        // Implement your authentication logic here using Spring Security
+//        // You don't need to handle authentication here; Spring Security handles it
+//
+//        // Redirect to the dashboard on successful login
+//        return "redirect:/dashboard";
+//    }
+//
+//    @PostMapping("/authenticate")
+//    public String register(@RequestParam("email") String email,
+//                           @RequestParam("password") String password) {
+//        // Implement your registration logic here using Spring Security
+//        // You don't need to handle registration here; Spring Security handles it
+//
+//        // Redirect to the login page with a registration success message
+//        return "redirect:/login?registration=success";
+//    }
+
+

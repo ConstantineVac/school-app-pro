@@ -31,7 +31,7 @@ public class Teacher {
     @Column(name = "lastname", nullable = false)
     private String lastname;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Specialty specialty;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)

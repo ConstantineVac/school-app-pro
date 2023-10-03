@@ -65,7 +65,7 @@
 #login:hover {
     cursor: pointer;
     text-decoration: none; /* Remove the underline on the anchor tag */
-    color: #f59dff; /* Set the icon color to white */
+    color: #efd7f3; /* Set the icon color to white */
 }
 
 .login-icon a:hover,
@@ -239,7 +239,7 @@ span {
     justify-content: space-between;
     align-items: center;
     height: 120px;
-    background-color: rgb(168, 168, 168);
+    background-color: #8a5fb0;
     padding: 0 10px;
     font-size: 13px;
     font-weight: 600;
@@ -249,7 +249,7 @@ span {
 }
 
 .social-links > a {
-    color: #84e0e0;
+    color: #ffffff;
     font-size: 30px;
 }
 
@@ -313,6 +313,15 @@ span {
 
     .hamb-line {
         display: block;
+    }
+
+
+    .tag,
+    .tag2 {
+        position: static;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 0.9rem;
     }
 }
 
@@ -398,4 +407,13 @@ span {
     .navbar-links li {
         text-align: center;
     }
+    .tag,
+    .tag2 {
+        position: static;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1rem;
+    }
 }
+
+

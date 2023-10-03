@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,9 @@
 <body>
 <div class="container" id="container">
     <div class="form-container sign-up">
-        <form method="post" action="/authenticate">
-            <input type="hidden" name="formType" value="register"> <!-- Hidden field for registration -->
+        <form method="post" th:action="@{/authenticate}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
             <h1>Create Account</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -27,9 +28,13 @@
             <button type="submit">Sign Up</button>
         </form>
     </div>
-    <div class="form-container sign-in">
-        <form method="post" action="/authenticate">
-            <input type="hidden" name="formType" value="login"> <!-- Hidden field for login -->
+    <div class="form-container sign-in" >
+
+        <form th:action="@{/login}" method="post">
+
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+
             <h1>Sign In</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -38,8 +43,8 @@
                 <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your email password</span>
-            <input type="email" placeholder="Email" name="email">
-            <input type="password" placeholder="Password" name="password">
+            <input id="email" class="form-input account" type="text" placeholder="email" value="" name="username" autofocus>
+            <input id="password" class="form-input password" type="password" placeholder="password" value="" name="password">
             <a href="#">Forget Your Password?</a>
             <button type="submit">Sign In</button>
         </form>

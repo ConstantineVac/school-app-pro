@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Meeting</title>
@@ -17,14 +17,16 @@
 </head>
 <body>
 <h2>🔎 Search for a Meeting</h2>
-<form method="post" action="/meeting/search">
+<form method="post" th:action="@{/meeting/search}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <label for="meetingClassroom">Classroom name:</label>
     <input type="text" id="meetingClassroom" name="meetingClassroom">
     <button type="submit">Search</button>
 </form>
 
 <h2>📝 Insert a Meeting</h2>
-<form method="post" action="/meeting/insert">
+<form method="post" th:action="@{/meeting/insert}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
     <label for="meetingDate">Meeting Date (YYYY-MM-DD):</label>
     <input type="text" id="meetingDate" name="meetingDate" required><br>

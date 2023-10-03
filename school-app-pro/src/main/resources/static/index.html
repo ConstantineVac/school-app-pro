@@ -60,13 +60,14 @@
       </div>
     </nav>
     <!-- Login icon -->
-    <div class="login-icon">
-      <a id="login" th:href="@{/login}" href="/login">
-        <i class="fas fa-user"></i>
-<!--        <br>-->
-        Login
-      </a>
-      <span></span>
+    <div class="button-container">
+      <div class="login-icon">
+        <a id="login" th:href="@{/dashboard}" href="/dashboard">
+          <i class="fas fa-user"></i>
+          Login
+        </a>
+        <span></span>
+      </div>
     </div>
   </header>
 </div>
@@ -75,7 +76,7 @@
 <div class="main-body">
   <img th:src="@{img/img1.jpg}" src="img/img1.jpg" alt="image">
   <div class="tag"><span>School Management...</span></div>
-  <div class="tag2"><span>Made irrationally easy!</span></div>
+  <div class="tag2"><span>Made exceptionally easy!</span></div>
 </div>
 
 <div class="main">
@@ -119,5 +120,25 @@
     <a href="#"><i class="fab fa-twitter-square"></i></a>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var csrfToken = getCookie("XSRF-TOKEN");
+    if (csrfToken) {
+      var form = document.getElementById('logoutForm');
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = '_csrf';
+      input.value = csrfToken;
+      form.appendChild(input);
+    }
+  });
+
+  function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+  }
+</script>
 </body>
 </html>

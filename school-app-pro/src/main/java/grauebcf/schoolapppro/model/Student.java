@@ -29,7 +29,7 @@ public class Student {
     @Column(name = "lastname",nullable = false)
     private String lastname;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="city_id")
     private City city;
 

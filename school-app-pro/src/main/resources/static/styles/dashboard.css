@@ -1,42 +1,105 @@
+/* Body Background Color */
 body {
-    background-color: #f1f1f1;
+    background-color: #512da8;
+    color: white;
     font-family: Arial, sans-serif;
-    margin: 0;
+    text-align: center; /* Center-align text within the body */
 }
 
+/* Container Styles */
 .container {
+    background-color: #5c6bc0;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+/* Heading Styles */
+h1 {
+    color: #fff;
+    margin-top: 150px; /* Add top margin to create space */
+}
+
+/* Buttons Container Styles */
+.buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Control Button Styles */
+.control-btn {
+    text-decoration: none;
+    color: white;
+    background-color: #512da8;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.control-btn i {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.control-btn:hover {
+    background-color: #e2e2e2;
+    color: #512da8;
+}
+
+/* User Container Styles */
+.user-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.buttons-container {
-    display: flex;
-    justify-content: center;
-}
-
-.control-btn {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 24px;
+/* User Info Styles */
+.user-info {
+    font-style: italic;
+    text-align: center;
+    color: white;
     border: none;
     border-radius: 5px;
-    font-size: 18px;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: #744bda;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 5px;
+    width: 300px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.control-btn:hover {
-    background-color: #4c2ba1;
+.user-info span {
+    font-weight: bold;
+}
+
+/* Logout Button Styles */
+.logout-btn {
+    background-color: #512da8;
+    color: white;
+    border: solid 1px white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.logout-btn i {
+    margin-right: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #e2e2e2;
+    color: #7c59d3;
 }

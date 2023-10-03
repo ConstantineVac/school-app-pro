@@ -1,6 +1,5 @@
 package grauebcf.schoolapppro.controller;
 
-import grauebcf.schoolapppro.dto.CityUpdateDTO;
 import grauebcf.schoolapppro.model.City;
 import grauebcf.schoolapppro.repository.CityRepository;
 import grauebcf.schoolapppro.service.CityService;

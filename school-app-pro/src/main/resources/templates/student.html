@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="/styles/teacher.css" rel="stylesheet" type="text/css">
@@ -8,14 +8,16 @@
 </head>
 <body>
 <h2>🔎 Search for a Student</h2>
-<form method="post" action="/student/search">
+<form method="post" th:action="@{/student/search}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <label for="studentLastName">Student Lastname:</label>
     <input type="text" id="studentLastName" name="studentLastName">
     <button type="submit">Search</button>
 </form>
 
 <h2>📝 Insert a Student</h2>
-<form method="post" action="/student/insert">
+<form method="post" th:action="@{/student/insert}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
     <label for="firstname">First Name:</label>
     <input type="text" id="firstname" name="firstname" required><br>

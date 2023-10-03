@@ -10,8 +10,9 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <div class="container">
-        <h1>School App Pro Dashboard</h1>
+
+<h1>School App Pro Dashboard</h1>
+<div class="container">
         <div class="buttons-container">
             <a th:href="@{/teacher}" href="/teacher" class="control-btn">
                 <i class="fas fa-chalkboard-teacher"></i>
@@ -34,6 +35,18 @@
                 Meetings Menu
             </a>
         </div>
+
+    <div class="user-container">
+        <!-- Add the "Logged in as" message and Font Awesome logout button here -->
+        <div class="user-info">
+            Logged in as <span th:text="${username}"></span>
+            <form th:action="@{/logout}" method="post">
+                <button class="logout-btn" type="submit">
+                    <i class="fa fa-sign-out"></i> Logout
+                </button>
+            </form>
+        </div>
     </div>
+</div>
 </body>
 </html>

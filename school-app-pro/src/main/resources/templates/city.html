@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="/styles/city.css" rel="stylesheet" type="text/css">
@@ -8,13 +8,15 @@
 </head>
     <body>
         <h2>🔎 Search for a City</h2>
-        <form method="post" action="/city/search">
+        <form method="post" th:action="@{/city/search}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <label for="cityName">City Name:</label>
             <input type="text" id="city-Name" name="cityName">
             <button type="submit">Search</button>
         </form>
         <h2>📝 Insert a City</h2>
-        <form method="post" action="/city/insert">
+        <form method="post" th:action="@{/city/insert}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <label for="cityName">City Name:</label>
             <input type="text" id="cityName" name="cityName" required>
             <button type="submit">Insert</button>

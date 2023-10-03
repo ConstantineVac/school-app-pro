@@ -1,6 +1,5 @@
 package grauebcf.schoolapppro.service;
 
-import grauebcf.schoolapppro.dto.CityUpdateDTO;
 import grauebcf.schoolapppro.model.City;
 import grauebcf.schoolapppro.service.exception.CityNotFoundException;
 
