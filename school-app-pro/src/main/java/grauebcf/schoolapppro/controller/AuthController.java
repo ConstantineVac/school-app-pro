@@ -10,15 +10,16 @@ import grauebcf.schoolapppro.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
+
+import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -49,110 +50,77 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
-
     @GetMapping(path = "/login")
     public String login(Principal principal, HttpServletRequest request, Model model) {
         String referer = request.getHeader("Referer");
         request.getSession().setAttribute(CustomAuthenticationSuccessHandler.REDIRECT_URL, referer);
+
         // Check if an error message should be displayed
-        String errorMessage = (String) request.getSession().getAttribute("loginErrorMessage");
-        if (errorMessage != null) {
-            model.addAttribute("errorMessage", errorMessage);
-            request.getSession().removeAttribute("loginErrorMessage"); // Remove the message from the session
+        Object authenticationException = request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+        if (authenticationException != null) {
+            String errorMessage = null;
+
+            if (authenticationException instanceof org.springframework.security.authentication.BadCredentialsException) {
+                errorMessage = "Invalid email or password.";
+            } else if (authenticationException instanceof org.springframework.security.core.userdetails.UsernameNotFoundException) {
+                errorMessage = "User with this email does not exist.";
+            }
+
+            // Remove the exception from the session after capturing the error message
+            request.getSession().removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+            // Set the error message in the model if one was found
+            if (errorMessage != null) {
+                model.addAttribute("errorLoginMessage", errorMessage);
+            }
         }
 
         return principal == null ? "login" : "redirect:/dashboard";
     }
 
 
-
-
-//    @GetMapping(path = "/index")
-//    public String root(Principal principal) {
-//        return principal == null ? "login" : "redirect:/dashboard"; // Change to "/dashboard"
-//    }
-
-
-
     @PostMapping("/authenticate")
-    public String processRegistrationForm(@Valid @ModelAttribute("userRegisterDTO") UserRegisterDTO userRegisterDTO, BindingResult result) {
+    public String processRegistrationForm(@Valid @ModelAttribute("userRegisterDTO") UserRegisterDTO userRegisterDTO, BindingResult result, Model model) {
         userValidator.validate(userRegisterDTO, result);
 
-        if (result.hasErrors()) {
+
+        if (userRepository.emailExists(userRegisterDTO.getEmail())) {
+            model.addAttribute("errorRegisterMessage", "Email already exists. Please log in.");
             return "login";
         }
 
-        //     Encode the user's password using BCrypt
+        if (result.hasErrors()) {
+            // Check for password-related errors
+            if (result.hasFieldErrors("password")) {
+                model.addAttribute("errorRegisterMessage", "Invalid password. Password must meet the criteria. At least 8 Characters long, including 1 lowercase, 1 uppercase and 1 number");
+            } else {
+                // Other validation errors occurred
+                model.addAttribute("errorRegisterMessage", "Invalid input. Please check your email or password.");
+            }
+            return "login";
+        }
+
+        // Encode the user's password using BCrypt
         String rawPassword = userRegisterDTO.getPassword();
         String encodedPassword = passwordEncoder.encode(rawPassword);
         userRegisterDTO.setPassword(encodedPassword);
 
-        User createdUser = userService.registerUser(userRegisterDTO);
+        try {
+            User createdUser = userService.registerUser(userRegisterDTO);
 
-        // login with the newly created account and redirect to search page
-        securityService.autoLogin(createdUser);
+            // login with the newly created account and redirect to dashboard
+            securityService.autoLogin(createdUser);
 
-        return "redirect:/dashboard";
+            return "redirect:/dashboard";
+        } catch (Exception e) {
+            // Handle other exceptions if needed
+//            model.addAttribute("errorRegisterMessage", "An error occurred during registration.");
+            return "login"; // Replace with the name of your combined view
+        }
     }
-
-
-    @GetMapping("/authenticate")
-    public String showRegistrationForm(Model model) {
-        // Create a new UserRegisterDTO object and add it to the model
-        UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
-        model.addAttribute("userRegisterDTO", userRegisterDTO);
-
-        return "login"; // Assuming userLogin.html contains both login and registration forms
-    }
-
 }
 
-//@Controller
-//public class AuthController {
-//
-//    private final UserRepository userRepository;
-//    private final UserService userService;
-//
-//    @Autowired
-//    public AuthController(UserRepository userRepository, UserService userService) {
-//        this.userRepository = userRepository;
-//        this.userService = userService;
-//    }
-//
-//    @GetMapping("/login")
-//    public ModelAndView showLoginForm(@RequestParam(name = "error", required = false) String error,
-//                                      @RequestParam(name = "registration", required = false) String registration) {
-//        ModelAndView modelAndView = new ModelAndView("login");
-//
-//        // Add any error or registration success messages to the model
-//        if (error != null) {
-//            modelAndView.addObject("error", "Authentication failed. Please check your credentials.");
-//        }
-//        if (registration != null) {
-//            modelAndView.addObject("registration", "Registration successful. You can now log in.");
-//        }
-//
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/login")
-//    public String login(@RequestParam("email") String email,
-//                        @RequestParam("password") String password) {
-//        // Implement your authentication logic here using Spring Security
-//        // You don't need to handle authentication here; Spring Security handles it
-//
-//        // Redirect to the dashboard on successful login
-//        return "redirect:/dashboard";
-//    }
-//
-//    @PostMapping("/authenticate")
-//    public String register(@RequestParam("email") String email,
-//                           @RequestParam("password") String password) {
-//        // Implement your registration logic here using Spring Security
-//        // You don't need to handle registration here; Spring Security handles it
-//
-//        // Redirect to the login page with a registration success message
-//        return "redirect:/login?registration=success";
-//    }
+
 
 

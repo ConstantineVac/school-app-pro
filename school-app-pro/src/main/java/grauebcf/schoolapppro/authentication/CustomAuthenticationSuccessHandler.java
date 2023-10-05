@@ -19,6 +19,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         Object redirectURLObject = request.getSession().getAttribute("REDIRECT_URL");
+        request.getSession().removeAttribute(REDIRECT_URL);
 
         if (redirectURLObject != null) {
             setDefaultTargetUrl(redirectURLObject.toString());

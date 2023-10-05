@@ -56,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .failureUrl("/login?error") // Redirect to /login?error on authentication failure
                 .defaultSuccessUrl("/dashboard").permitAll()
                 .successHandler(customAuthenticationSuccessHandler) // Use injected bean here
                 .permitAll()

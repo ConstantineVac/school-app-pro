@@ -23,18 +23,15 @@
                 <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your email for registration</span>
-            <input type="email" placeholder="Email" name="email">
-            <input type="password" placeholder="Password" name="password">
+            <input type="email" placeholder="Email" name="email" required autofocus>
+            <input type="password" placeholder="Password" name="password" required autofocus>
             <button type="submit">Sign Up</button>
         </form>
     </div>
     <div class="form-container sign-in" >
 
         <form th:action="@{/login}" method="post">
-
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-
-
             <h1>Sign In</h1>
             <div class="social-icons">
                 <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -43,10 +40,11 @@
                 <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your email password</span>
-            <input id="email" class="form-input account" type="text" placeholder="email" value="" name="username" autofocus>
-            <input id="password" class="form-input password" type="password" placeholder="password" value="" name="password">
+            <input id="email" class="form-input account" type="text" placeholder="email" value="" name="username" required autofocus>
+            <input id="password" class="form-input password" type="password" placeholder="password" value="" name="password" required autofocus>
             <a href="#">Forget Your Password?</a>
             <button type="submit">Sign In</button>
+            <div style="color: red; margin-top: 10px" class="error" th:if="${errorLoginMessage}" th:text="${errorLoginMessage}"></div>
         </form>
     </div>
     <div class="toggle-container">
@@ -64,6 +62,8 @@
         </div>
     </div>
 </div>
+<div style="color: red; margin-top: 20px" class="error" th:if="${errorRegisterMessage}" th:text="${errorRegisterMessage}"></div>
+
 <script src="/js/script.js" type="text/javascript"></script>
 </body>
 </html>
