@@ -38,4 +38,34 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Meeting> meetings = new ArrayList<>();
+
+    // Convenience methods
+
+    // Set the city for this student
+    public void setCity(City city) {
+        // Check if the current city is different from the new city
+        if (this.city != null && !this.city.equals(city)) {
+            this.city.getStudents().remove(this);
+        }
+
+        this.city = city;
+
+        if (city != null && !city.getStudents().contains(this)) {
+            city.getStudents().add(this);
+        }
+    }
+
+    public void addMeeting(Meeting meeting) {
+        if (meeting != null && !meetings.contains(meeting)) {
+            meetings.add(meeting);
+            meeting.setStudent(this);
+        }
+    }
+
+    public void removeMeeting(Meeting meeting) {
+        if (meeting != null && meetings.contains(meeting)) {
+            meetings.remove(meeting);
+            meeting.setStudent(null);
+        }
+    }
 }
