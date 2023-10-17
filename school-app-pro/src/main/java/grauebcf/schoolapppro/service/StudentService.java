@@ -33,11 +33,31 @@ public class StudentService implements IStudentService {
 
     @Override
     public Student insertStudent(Student student) {
+        if (student.getCity() != null) {
+            student.getCity().addStudent(student);
+        }
         return studentRepository.save(student);
     }
 
     @Override
     public Student updateStudent(Student student) throws StudentNotFoundException {
+        if (!studentRepository.existsById(student.getStudentId())) {
+            throw new StudentNotFoundException(student.getStudentId());
+        }
+
+        Student existingStudent = studentRepository.findById(student.getStudentId()).orElse(null);
+
+        // Check if the city has changed
+        if (existingStudent != null && existingStudent.getCity() != null && !existingStudent.getCity().equals(student.getCity())) {
+            // If the student was previously associated with a different city, remove the student from that city's list of students
+            existingStudent.getCity().removeStudent(existingStudent);
+        }
+
+        // If the student has a new city associated, add it using the convenience method
+        if (student.getCity() != null) {
+            student.getCity().addStudent(student);
+        }
+
         return studentRepository.save(student);
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "SPECIALTY", schema = "spring_school")
+@Table(name = "SPECIALTIES", schema = "spring_school")
 @Getter
 @Setter
 public class Specialty {
@@ -25,7 +25,7 @@ public class Specialty {
     @Column(name = "specialty_name", nullable = false)
     private String specialtyName;
 
-    @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Teacher> teachers = new ArrayList<>();
 
     // Convenience methods

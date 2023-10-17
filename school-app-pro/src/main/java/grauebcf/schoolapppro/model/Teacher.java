@@ -35,7 +35,7 @@ public class Teacher {
     @JoinColumn(name = "specialty_id")
     private Specialty specialty;
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Meeting> meetings = new ArrayList<>();
 
     // Convenience methods

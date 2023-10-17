@@ -36,7 +36,7 @@ public class Student {
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Meeting> meetings = new ArrayList<>();
 
     // Convenience methods

@@ -1,9 +1,6 @@
 package grauebcf.schoolapppro.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +12,7 @@ import java.util.List;
 @Table(name = "CITIES", schema = "spring_school")
 @Getter
 @Setter
+@Data
 public class City {
 
     @Id
@@ -25,7 +23,7 @@ public class City {
     @Column(name = "city_name")
     private String cityName;
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Student> students = new ArrayList<>();
     
     // Convenience methods

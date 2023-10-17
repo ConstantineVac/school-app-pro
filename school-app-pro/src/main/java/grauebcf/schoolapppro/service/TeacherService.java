@@ -32,11 +32,31 @@ public class TeacherService implements ITeacherService{
 
     @Override
     public Teacher insertTeacher(Teacher teacher) {
-        return teacherRepository.save(teacher);
+        if (teacher.getSpecialty() != null) {
+            teacher.getSpecialty().addTeacher(teacher);
+        }
+        return teacherRepository.save(teacher); // assuming you have a teacherRepository.
     }
 
     @Override
     public Teacher updateTeacher(Teacher teacher) throws TeacherNotFoundException {
+        if (!teacherRepository.existsById(teacher.getTeacherId())) {
+            throw new TeacherNotFoundException(teacher.getTeacherId());
+        }
+
+        Teacher existingTeacher = teacherRepository.findById(teacher.getTeacherId()).orElse(null);
+
+        // Check if the specialty has changed for the teacher
+        if (existingTeacher != null && existingTeacher.getSpecialty() != null && !existingTeacher.getSpecialty().equals(teacher.getSpecialty())) {
+            // If the teacher was previously associated with a different specialty, remove the teacher from that specialty's list
+            existingTeacher.getSpecialty().removeTeacher(existingTeacher);
+        }
+
+        // If the teacher has a new specialty associated, add it using the convenience method
+        if (teacher.getSpecialty() != null) {
+            teacher.getSpecialty().addTeacher(teacher);
+        }
+
         return teacherRepository.save(teacher);
     }
 

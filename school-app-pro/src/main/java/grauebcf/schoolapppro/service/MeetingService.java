@@ -33,11 +33,46 @@ public class MeetingService implements IMeetingService{
 
     @Override
     public Meeting insertMeeting(Meeting meeting) {
+        // If the meeting has a teacher or student associated,
+        // use the convenience methods to ensure consistency
+        if (meeting.getTeacher() != null) {
+            meeting.getTeacher().addMeeting(meeting);
+        }
+
+        if (meeting.getStudent() != null) {
+            meeting.getStudent().addMeeting(meeting);
+        }
+
         return meetingRepository.save(meeting);
     }
 
     @Override
     public Meeting updateMeeting(Meeting meeting) throws MeetingNotFoundException {
+        if (!meetingRepository.existsById(meeting.getMeetingId())) {
+            throw new MeetingNotFoundException(meeting.getMeetingId());
+        }
+
+        Meeting existingMeeting = meetingRepository.findById(meeting.getMeetingId()).orElse(null);
+
+        // If the meeting was previously associated with a different teacher, update that relationship
+        if (existingMeeting != null && existingMeeting.getTeacher() != null && !existingMeeting.getTeacher().equals(meeting.getTeacher())) {
+            existingMeeting.getTeacher().removeMeeting(existingMeeting);
+        }
+
+        // If the meeting was previously associated with a different student, update that relationship
+        if (existingMeeting != null && existingMeeting.getStudent() != null && !existingMeeting.getStudent().equals(meeting.getStudent())) {
+            existingMeeting.getStudent().removeMeeting(existingMeeting);
+        }
+
+        // Now, set the new relationships
+        if (meeting.getTeacher() != null) {
+            meeting.getTeacher().addMeeting(meeting);
+        }
+
+        if (meeting.getStudent() != null) {
+            meeting.getStudent().addMeeting(meeting);
+        }
+
         return meetingRepository.save(meeting);
     }
 
