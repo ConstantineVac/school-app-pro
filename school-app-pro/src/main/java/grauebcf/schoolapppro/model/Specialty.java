@@ -27,4 +27,19 @@ public class Specialty {
 
     @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL)
     private List<Teacher> teachers = new ArrayList<>();
+
+    // Convenience methods
+    public void addTeacher(Teacher teacher) {
+        if (teacher != null && !teachers.contains(teacher)) {
+            teachers.add(teacher);
+            teacher.setSpecialty(this);
+        }
+    }
+
+    public void removeTeacher(Teacher teacher) {
+        if (teacher != null && teachers.contains(teacher)) {
+            teachers.remove(teacher);
+            teacher.setSpecialty(null);
+        }
+    }
 }
