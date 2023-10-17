@@ -32,8 +32,36 @@ public class Teacher {
     private String lastname;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "specialty_id")
     private Specialty specialty;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Meeting> meetings = new ArrayList<>();
+
+    // Convenience methods
+    public void setSpecialty(Specialty specialty) {
+        if (this.specialty != null && !this.specialty.equals(specialty)) {
+            this.specialty.getTeachers().remove(this);
+        }
+
+        this.specialty = specialty;
+
+        if (specialty != null && !specialty.getTeachers().contains(this)) {
+            specialty.getTeachers().add(this);
+        }
+    }
+
+    public void addMeeting(Meeting meeting) {
+        if (meeting != null && !meetings.contains(meeting)) {
+            meetings.add(meeting);
+            meeting.setTeacher(this);
+        }
+    }
+
+    public void removeMeeting(Meeting meeting) {
+        if (meeting != null && meetings.contains(meeting)) {
+            meetings.remove(meeting);
+            meeting.setTeacher(null);
+        }
+    }
 }
