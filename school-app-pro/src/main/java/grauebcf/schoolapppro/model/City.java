@@ -27,5 +27,22 @@ public class City {
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
     private List<Student> students = new ArrayList<>();
+    
+    // Convenience methods
+    // Add a student to this city
+    public void addStudent(Student student) {
+        if (students == null) {
+            students = new ArrayList<>();
+        }
+        students.add(student);
+        student.setCity(this);
+    }
 
+    // Remove a student from this city
+    public void removeStudent(Student student) {
+        if (students != null) {
+            students.remove(student);
+        }
+        student.setCity(null);
+    }
 }
