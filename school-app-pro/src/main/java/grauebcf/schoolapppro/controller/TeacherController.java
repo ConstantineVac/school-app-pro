@@ -1,13 +1,11 @@
 package grauebcf.schoolapppro.controller;
 
-import grauebcf.schoolapppro.model.City;
 import grauebcf.schoolapppro.model.Specialty;
 import grauebcf.schoolapppro.model.Teacher;
 import grauebcf.schoolapppro.repository.SpecialtyRepository;
 import grauebcf.schoolapppro.repository.TeacherRepository;
 import grauebcf.schoolapppro.service.SpecialtyService;
 import grauebcf.schoolapppro.service.TeacherService;
-import grauebcf.schoolapppro.service.exception.CityNotFoundException;
 import grauebcf.schoolapppro.service.exception.TeacherNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +33,7 @@ public class TeacherController {
 
     @GetMapping("/teacher")
     public ModelAndView showTeacherForm() {
-        List<Specialty> specialties = specialtyService.getAllSpecialties(); // Replace with your service call
+        List<Specialty> specialties = specialtyService.getAllSpecialties(); 
         ModelAndView modelAndView = new ModelAndView("teacher");
         modelAndView.addObject("specialties", specialties);
         return modelAndView;
@@ -63,12 +61,8 @@ public class TeacherController {
             @RequestParam("firstname") String firstname,
             @RequestParam("lastname") String lastname,
             @RequestParam("specialtyId") Long specialtyId,
-            Model model) { // Add Model as a method parameter
+            Model model) { 
 
-        // Process and save the teacher's information here
-        // You can use the firstname, lastname, and specialtyId received from the form
-
-        // Assuming you have a service method to save the teacher
         Teacher teacher = new Teacher();
         teacher.setSsn(ssn);
         teacher.setFirstname(firstname);
@@ -85,12 +79,12 @@ public class TeacherController {
         model.addAttribute("lastname", teacher.getLastname());
         model.addAttribute("specialty", specialtyId);
 
-        return "teacherInserted"; // Redirect to a page after saving the teacher
+        return "teacherInserted"; 
     }
 
     @GetMapping(value = "/editTeacher/{id}")
     public ModelAndView editTeacher(@PathVariable("id") String teacherId) {
-        List<Specialty> specialties = specialtyService.getAllSpecialties(); // Replace with your service call
+        List<Specialty> specialties = specialtyService.getAllSpecialties(); 
         ModelAndView modelAndView = new ModelAndView("teacherUpdate");
         Long tId = Long.parseLong(teacherId);
         Teacher formTeacher = teacherRepository.getTeachersByTeacherId(tId);
@@ -130,23 +124,6 @@ public class TeacherController {
         return "teacherUpdated";
     }
 
-//    @RequestMapping(value = "/teacher/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
-//    public ModelAndView deleteTeacher(@RequestParam("teacherId") Long teacherId) {
-//        Teacher deletedTeacher;
-//        try {
-//            deletedTeacher = teacherRepository.getTeachersByTeacherId(teacherId); // Retrieve the city before deletion
-//            teacherService.deleteTeacher(teacherId); // Delete the city
-//        } catch (TeacherNotFoundException e) {
-//            ModelAndView modelAndView = new ModelAndView("error");
-//            modelAndView.addObject("errorMessage", "Teacher not found");
-//            return modelAndView;
-//        }
-//
-//        ModelAndView modelAndView = new ModelAndView("teacherDeleted");
-//        modelAndView.addObject("deletedTeacher", deletedTeacher);
-//        return modelAndView;
-//    }
-
     @RequestMapping(value = "/teacher/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public ModelAndView deleteTeacher(@RequestParam("teacherId") Long teacherId) {
         Teacher deletedTeacher;
@@ -159,7 +136,6 @@ public class TeacherController {
             if (deletedTeacher != null && deletedTeacher.getSpecialty() != null) {
                 specialtyId = specialtyRepository.getSpecialtyById(deletedTeacher.getSpecialty().getSpecialtyId()).getSpecialtyId();
             }
-
             teacherService.deleteTeacher(teacherId); // Delete the teacher
         } catch (TeacherNotFoundException e) {
             ModelAndView modelAndView = new ModelAndView("error");
@@ -175,6 +151,5 @@ public class TeacherController {
 
         return modelAndView;
     }
-
 }
 
