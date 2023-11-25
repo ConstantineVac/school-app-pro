@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -114,9 +112,7 @@ public class AuthController {
 
             return "redirect:/dashboard";
         } catch (Exception e) {
-            // Handle other exceptions if needed
-//            model.addAttribute("errorRegisterMessage", "An error occurred during registration.");
-            return "login"; // Replace with the name of your combined view
+            return "login"; 
         }
     }
 }
