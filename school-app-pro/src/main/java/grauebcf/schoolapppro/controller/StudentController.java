@@ -44,21 +44,6 @@ public class StudentController {
         return modelAndView;
     }
 
-//    @PostMapping("/student/search")
-//    public ModelAndView searchStudents(@RequestParam(value = "lastname", required = false) String lastname) {
-//        List<Student> students;
-//
-//        if (lastname != null && !lastname.trim().isEmpty()) {
-//            students = studentService.searchStudents(lastname);
-//        } else {
-//            students = studentService.getAllStudents();
-//        }
-//
-//        ModelAndView modelAndView = new ModelAndView("students");
-//        modelAndView.addObject("students", students);
-//        return modelAndView;
-//    }
-
     @PostMapping("/student/search")
     public ModelAndView searchStudents(@RequestParam(value = "studentLastName", required = false) String lastname) {
         System.out.println("Lastname parameter: " + lastname); // Debugging statement
@@ -78,7 +63,6 @@ public class StudentController {
         return modelAndView;
     }
 
-
     @PostMapping("/student/insert")
     public String saveStudent(
             @RequestParam("firstname") String firstname,
@@ -87,7 +71,7 @@ public class StudentController {
             @RequestParam("birthday") String birthday,
             Model model) { // Add Model as a method parameter
 
-        // Assuming you have a service method to save the teacher
+        
         Student student = new Student();
         student.setFirstname(firstname);
         student.setLastname(lastname);
@@ -106,12 +90,12 @@ public class StudentController {
         model.addAttribute("city", cityId);
         model.addAttribute("birthday", student.getBirthday());
 
-        return "studentInserted"; // Redirect to a page after saving the teacher
+        return "studentInserted"; 
     }
 
     @GetMapping(value = "/editStudent/{id}")
     public ModelAndView editStudent(@PathVariable("id") String studentId) {
-        List<City> cities = cityService.getAllCities(); // Replace with your service call
+        List<City> cities = cityService.getAllCities(); 
         ModelAndView modelAndView = new ModelAndView("studentUpdate");
         Long sId = Long.parseLong(studentId);
         Student formStudent = studentRepository.getStudentsByStudentId(sId);
@@ -119,37 +103,6 @@ public class StudentController {
         modelAndView.addObject("cities", cities);
         return modelAndView;
     }
-
-//    @PostMapping(value = "/student/updateStudent/student/{id}")
-//    public String updateStudent(@ModelAttribute("student") Student student,
-//                                @PathVariable("id") Long id,
-//                                @RequestParam("firstname") String firstname,
-//                                @RequestParam("lastname") String lastname,
-//                                @RequestParam("cityId") Long cityId,
-//                                @RequestParam("birthday") String birthday,
-//                                Model model) throws StudentNotFoundException {
-//        // Retrieve student by ID.
-//        Student existingStudent = studentRepository.getStudentsByStudentId(id);
-//
-//        // Update found student properties
-//        existingStudent.setFirstname(student.getFirstname());
-//        existingStudent.setLastname(student.getLastname());
-//
-//        City city = cityRepository.getCityById(cityId);
-//        existingStudent.setCity(city);
-//
-//        existingStudent.setBirthday(LocalDate.parse(birthday));
-//
-//        studentService.updateStudent(existingStudent);
-//
-//        // Add student data to the model
-//        model.addAttribute("firstname", student.getFirstname());
-//        model.addAttribute("lastname", student.getLastname());
-//        model.addAttribute("city", cityId);
-//        model.addAttribute("birthday", student.getBirthday());
-//
-//        return "studentUpdated";
-//    }
 
     @PostMapping("/student/updateStudent/student/{id}")
     public String updateStudent(
@@ -176,10 +129,6 @@ public class StudentController {
         try {
             studentService.updateStudent(existingStudent);
         } catch (StudentNotFoundException e) {
-            // Handle the exception if the student is not found.
-            // You can redirect to an error page or handle it as needed.
-
-            // For example:
             model.addAttribute("errorMessage", "Student not found");
             return "errorPage"; // Redirect to an error page
         }
@@ -190,7 +139,7 @@ public class StudentController {
         model.addAttribute("city", cityId);
         model.addAttribute("birthday", existingStudent.getBirthday());
 
-        return "studentUpdated"; // Redirect to a page after updating the student
+        return "studentUpdated"; 
     }
 
 
