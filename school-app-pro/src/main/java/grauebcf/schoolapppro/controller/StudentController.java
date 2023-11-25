@@ -38,7 +38,7 @@ public class StudentController {
 
     @GetMapping("/student")
     public ModelAndView showStudentForm() {
-        List<City> cities = cityService.getAllCities(); // Replace with your service call
+        List<City> cities = cityService.getAllCities(); 
         ModelAndView modelAndView = new ModelAndView("student");
         modelAndView.addObject("cities", cities);
         return modelAndView;
@@ -69,7 +69,7 @@ public class StudentController {
             @RequestParam("lastname") String lastname,
             @RequestParam("cityId") Long cityId,
             @RequestParam("birthday") String birthday,
-            Model model) { // Add Model as a method parameter
+            Model model) { 
 
         
         Student student = new Student();
@@ -130,7 +130,7 @@ public class StudentController {
             studentService.updateStudent(existingStudent);
         } catch (StudentNotFoundException e) {
             model.addAttribute("errorMessage", "Student not found");
-            return "errorPage"; // Redirect to an error page
+            return "errorPage"; 
         }
 
         // Add updated student data to the model
@@ -147,7 +147,7 @@ public class StudentController {
     @RequestMapping(value = "/student/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
     public ModelAndView deleteStudent(@RequestParam("studentId") Long studentId) {
         Student deletedStudent;
-        Long cityId = null; // Initialize cityId to null
+        Long cityId = null; 
 
         try {
             deletedStudent = studentRepository.getStudentsByStudentId(studentId); // Retrieve the teacher before deletion
