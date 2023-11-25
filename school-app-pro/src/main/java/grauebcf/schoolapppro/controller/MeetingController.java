@@ -1,6 +1,5 @@
 package grauebcf.schoolapppro.controller;
 
-import grauebcf.schoolapppro.model.City;
 import grauebcf.schoolapppro.model.Meeting;
 import grauebcf.schoolapppro.model.Student;
 import grauebcf.schoolapppro.model.Teacher;
@@ -11,7 +10,6 @@ import grauebcf.schoolapppro.service.MeetingService;
 import grauebcf.schoolapppro.service.StudentService;
 import grauebcf.schoolapppro.service.TeacherService;
 import grauebcf.schoolapppro.service.exception.MeetingNotFoundException;
-import grauebcf.schoolapppro.service.exception.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,10 +141,7 @@ public class MeetingController {
         try {
             meetingService.updateMeeting(existingMeeting);
         } catch (MeetingNotFoundException e) {
-            // Handle the exception if the student is not found.
-            // You can redirect to an error page or handle it as needed.
-
-            // For example:
+            // Example Error page.
             model.addAttribute("errorMessage", "Meeting not found");
             return "errorPage"; // Redirect to an error page
         }
