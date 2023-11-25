@@ -1,11 +1,8 @@
 package grauebcf.schoolapppro.controller;
 
-
-import grauebcf.schoolapppro.model.City;
 import grauebcf.schoolapppro.model.Specialty;
 import grauebcf.schoolapppro.repository.SpecialtyRepository;
 import grauebcf.schoolapppro.service.SpecialtyService;
-import grauebcf.schoolapppro.service.exception.CityNotFoundException;
 import grauebcf.schoolapppro.service.exception.SpecialtyNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,7 +58,7 @@ public class SpecialtyController {
         ModelAndView modelAndView = new ModelAndView("specialtyUpdate");
         Long sId = Long.parseLong(specialtyId);
         Specialty formSpecialty = specialtyRepository.getSpecialtyById(sId);
-        modelAndView.addObject("specialty", formSpecialty); // Add cityId to the model
+        modelAndView.addObject("specialty", formSpecialty); 
         return modelAndView;
     }
 
@@ -76,7 +73,6 @@ public class SpecialtyController {
         // Call your cityService method to update the city in the database
         specialtyService.updateSpecialty(existingSpecialty);
 
-        // Redirect to a success page or wherever needed
         return "specialtyUpdated";
     }
 
